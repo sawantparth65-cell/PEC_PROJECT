@@ -1,0 +1,99 @@
+PULSEBI – DATASET TRAINING DOCUMENTATION
+
+DOCUMENT STATUS
+
+This document describes a proposed machine-learning extension for
+PulseBI. It is planning/documentation only. It does NOT mean that a
+model has already been trained, evaluated, or integrated into the
+application.
+
+1. PROJECT OVERVIEW
+
+PulseBI is a Flask-based Business Intelligence and Sales Analysis
+application. It processes sales data and presents analytical summaries,
+visualizations, business insights, and downloadable reports.
+
+2. PROPOSED MACHINE-LEARNING EXTENSION
+
+Objective: Use historical sales records to train a regression model that
+estimates a selected target, such as Profit or Revenue.
+
+Suggested algorithm: Random Forest Regressor (Scikit-learn).
+
+3. PROPOSED DATASET FIELDS
+
+Potential input columns: - Quantity - Unit_Price - Discount_Percent -
+Category (after categorical encoding) - Region (after categorical
+encoding) - Sales_Channel (after categorical encoding)
+
+Potential prediction target: - Profit (or Revenue; select one target for
+each model)
+
+The dataset must be checked for missing values, invalid records,
+duplicates, and data leakage before training. Identifiers such as
+Order_ID should not be used as predictive features.
+
+4. PROPOSED WORKFLOW
+
+1.  Load the sales Excel/CSV dataset using Pandas.
+
+2.  Validate required columns and inspect data types.
+
+3.  Clean missing, duplicate, and invalid records.
+
+4.  Separate input features from the selected target.
+
+5.  Encode categorical columns.
+
+6.  Split data into training and test sets.
+
+7.  Train a Random Forest Regressor on the training set.
+
+8.  Evaluate predictions on the held-out test set.
+
+9.  Record metrics such as MAE, RMSE, and R-squared.
+
+10. Save the fitted pipeline only after successful training.
+
+11. Integrate prediction functionality into the PulseBI interface.
+
+12. MODEL EVALUATION
+
+    Mean Absolute Error (MAE): Average absolute difference between
+    actual and predicted values.
+
+Root Mean Squared Error (RMSE): Square root of the average squared
+prediction error.
+
+R-squared (R²): Measures how much target variation is explained by the
+model. A negative R² is possible and indicates poor performance.
+
+No metric values are included here because no training run has been
+performed as part of this documentation.
+
+6. PROPOSED FILE STRUCTURE
+
+model/ training_documentation.txt train_model.py (to be implemented)
+trained_model.pkl (created only after successful training)
+
+7. IMPORTANT IMPLEMENTATION NOTES
+
+-   A .pkl file should contain a real fitted model/pipeline, not an
+    empty or manually created placeholder.
+-   Keep the training dataset separate from the test dataset.
+-   Do not claim training or accuracy results until the script has
+    actually run.
+-   The model should be retrained when the dataset or feature
+    definitions change.
+-   Local model training does not require a paid external AI API.
+-   If the model is later exposed through an API, protect credentials
+    and handle unavailable services gracefully.
+
+8. CURRENT STATUS
+
+Documentation prepared. Model training: Not yet performed. Model
+evaluation: Not yet performed. Application integration: Not yet
+performed.
+
+This status should be updated only after the corresponding work is
+completed.
